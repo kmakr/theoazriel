@@ -1,0 +1,5 @@
+name = "theo-azriel-site"
+compatibility_date = "2025-08-18"
+
+[assets]
+directory = "."
