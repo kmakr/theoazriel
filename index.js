@@ -179,7 +179,7 @@ function animate() {
 
   // Rotate the model slowly
   if (model) {
-    model.rotation.y += 0.0001;
+    model.rotation.y += 0.001;
   }
 
   renderer.render(scene, camera);
