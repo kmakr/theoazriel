@@ -23,6 +23,9 @@ function initThreeJS() {
   loadingOverlay = document.getElementById("loading-overlay");
   loadingText = document.getElementById("loading-text");
 
+  // Hide page content while loading
+  document.body.classList.add("is-loading");
+
   // Create scene
   scene = new THREE.Scene();
   // scene.background = new THREE.Color(0x0a0a0a);
@@ -89,6 +92,7 @@ function loadGLTFModel() {
 
   manager.onLoad = function () {
     if (loadingOverlay) loadingOverlay.style.display = "none";
+    document.body.classList.remove("is-loading");
   };
 
   const loader = new THREE.GLTFLoader(manager);
@@ -141,6 +145,8 @@ function loadGLTFModel() {
       if (loadingText) {
         loadingText.textContent = "Failed to load";
       }
+      // Ensure page content becomes visible even on failure
+      document.body.classList.remove("is-loading");
     }
   );
 }

@@ -230,6 +230,15 @@ header .nav.social ul.flat a {
   display: block;
 }
 
+/* While loading, hide all page elements except the Three.js container */
+body.is-loading {
+  overflow: hidden;
+}
+
+body.is-loading > :not(#threejs-container) {
+  visibility: hidden !important;
+}
+
 .loading-overlay {
   position: absolute;
   inset: 0;
