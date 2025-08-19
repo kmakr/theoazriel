@@ -15,10 +15,13 @@ function scrollToTop() {
 // Three.js Scene Setup
 let scene, camera, renderer, model;
 let mixer; // For animations
+let loadingOverlay, loadingText; // Loading UI elements
 
 function initThreeJS() {
   const container = document.getElementById("threejs-container");
   const canvas = document.getElementById("threejs-canvas");
+  loadingOverlay = document.getElementById("loading-overlay");
+  loadingText = document.getElementById("loading-text");
 
   // Create scene
   scene = new THREE.Scene();
@@ -67,7 +70,28 @@ function initThreeJS() {
 }
 
 function loadGLTFModel() {
-  const loader = new THREE.GLTFLoader();
+  const manager = new THREE.LoadingManager();
+
+  manager.onStart = function () {
+    if (loadingOverlay) loadingOverlay.style.display = "flex";
+    if (loadingText) loadingText.textContent = "Loading…";
+  };
+
+  manager.onProgress = function (_url, itemsLoaded, itemsTotal) {
+    if (!loadingText) return;
+    if (itemsTotal > 0) {
+      const percent = Math.round((itemsLoaded / itemsTotal) * 100);
+      loadingText.textContent = percent + "%";
+    } else {
+      loadingText.textContent = "Loading…";
+    }
+  };
+
+  manager.onLoad = function () {
+    if (loadingOverlay) loadingOverlay.style.display = "none";
+  };
+
+  const loader = new THREE.GLTFLoader(manager);
 
   // Example with a test model - replace with your model path
   // loader.load('assets/your-model.gltf', ...)
@@ -107,16 +131,16 @@ function loadGLTFModel() {
       }
 
       console.log("GLTF model loaded successfully");
+      if (loadingText) loadingText.textContent = "100%";
+      if (loadingOverlay) loadingOverlay.style.display = "none";
     },
-    function (progress) {
-      console.log(
-        "Loading progress: ",
-        (progress.loaded / progress.total) * 100 + "%"
-      );
-    },
+    undefined,
     function (error) {
       console.error("Error loading GLTF model:", error);
       // createFallbackSphere();
+      if (loadingText) {
+        loadingText.textContent = "Failed to load";
+      }
     }
   );
 }
