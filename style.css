@@ -231,19 +231,12 @@ header .nav.social ul.flat a {
   display: block;
 }
 
-/* While loading, hide all page elements except the Three.js container */
-body.is-loading {
-  overflow: hidden;
-}
-
-body.is-loading > :not(#threejs-container) {
-  visibility: hidden !important;
-}
+/* Remove global hiding during loading to prevent layout from being stuck */
 
 .loading-overlay {
-  position: absolute;
+  position: fixed;
   inset: 0;
-  display: flex;
+  display: none; /* hidden by default; shown during load via JS */
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.25);
@@ -253,6 +246,7 @@ body.is-loading > :not(#threejs-container) {
   letter-spacing: 0.05em;
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
+  z-index: 999;
 }
 
 @media (max-width: 768px) {
