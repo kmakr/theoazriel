@@ -26,12 +26,12 @@ function initThreeJS() {
 
   // Create camera
   camera = new THREE.PerspectiveCamera(
-    75,
+    70,
     container.offsetWidth / container.offsetHeight,
-    0.1,
+    1,
     1000
   );
-  camera.position.set(0, 0, 5);
+  camera.position.set(0, 0, 4);
 
   // Create renderer
   renderer = new THREE.WebGLRenderer({
@@ -60,7 +60,6 @@ function initThreeJS() {
     loadGLTFModel();
   } else {
     console.log("GLTFLoader not available, using fallback sphere");
-    createFallbackSphere();
   }
 
   // Handle window resize
@@ -75,11 +74,10 @@ function loadGLTFModel() {
 
   // For testing, let's use a fallback sphere
   console.log("GLTFLoader is ready. Replace with your model path.");
-  createFallbackSphere();
 
   // Uncomment and modify this when you have a GLTF file:
   loader.load(
-    "assets/model.gltf",
+    "assets/mossy.glb",
     function (gltf) {
       // Remove the fallback sphere
       if (model) {
@@ -87,8 +85,10 @@ function loadGLTFModel() {
       }
 
       model = gltf.scene;
-      model.scale.setScalar(1);
-      model.position.set(0, 0, 0);
+      model.scale.setScalar(3.2);
+      // model.position.set(0, -0.5, 1);
+      model.position.set(0, -0.5, 1);
+
 
       model.traverse(function (child) {
         if (child.isMesh) {
@@ -116,21 +116,21 @@ function loadGLTFModel() {
     },
     function (error) {
       console.error("Error loading GLTF model:", error);
-      createFallbackSphere();
+      // createFallbackSphere();
     }
   );
 }
 
 function createFallbackSphere() {
-  const geometry = new THREE.SphereGeometry(1, 32, 32);
-  const material = new THREE.MeshPhongMaterial({
-    color: 0x00ff88,
-    shininess: 100,
-    transparent: true,
-    opacity: 0.8,
-  });
-  model = new THREE.Mesh(geometry, material);
-  scene.add(model);
+  // const geometry = new THREE.SphereGeometry(1, 32, 32);
+  // const material = new THREE.MeshPhongMaterial({
+  //   color: 0x00ff88,
+  //   shininess: 100,
+  //   transparent: true,
+  //   opacity: 0.8,
+  // });
+  // model = new THREE.Mesh(geometry, material);
+  // scene.add(model);
   console.log("Fallback sphere created");
 }
 
@@ -155,7 +155,7 @@ function animate() {
 
   // Rotate the model slowly
   if (model) {
-    model.rotation.y += 0.005;
+    model.rotation.y += 0.0001;
   }
 
   renderer.render(scene, camera);
@@ -166,12 +166,3 @@ window.addEventListener("load", () => {
   initThreeJS();
   animate();
 });
-
-// Keep your existing functions
-function removeSecretClass() {
-  // Your existing function here
-}
-
-function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}

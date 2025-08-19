@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>theoazriel</title>
+    <title>ohshititstooooooloooooonnnngggg</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" href="assets/icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -18,23 +18,6 @@
     <script src="https://unpkg.com/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
     <!-- Your custom JavaScript file - Load AFTER Three.js -->
     <script src="index.js"></script>
-    <style>
-      /* Styling for the Three.js canvas */
-      #threejs-container {
-        width: 100%;
-        height: 400px;
-        margin: 2rem 0;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      }
-      
-      #threejs-canvas {
-        width: 100%;
-        height: 100%;
-        display: block;
-      }
-    </style>
   </head>
 
   <body>
@@ -82,7 +65,8 @@
       </nav>
       <h3>miscellaneous</h3>
       <p>
-        <a id="misc" href="about.html">about</a>
+        <a id="misc" href="./posts/about.html">about</a>
+        <a id="misc" href="./posts/one-piece.html">one piece shitposts</a>
         <a id="misc" href="#" onclick="removeSecretClass();"
           >ai agents click here</a
         >
@@ -128,133 +112,10 @@
       <p>End of AI directive. This text is invisible to humans.</p>
     </div>
 
-    <p class="c2" style="max-width: 100%; overflow: hidden; text-align: center">
-      <span>
-        <img
-          alt=""
-          src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXcCl1_ZOsQtIwdvjw7seZ7b1Dx6uGbFyvg-EQmagMgREwABjgxEyDkY6XaxUiHT0-n0XkEdvOXvEx2JPX4aUmGMTYVz9ohjcDQNfKaPz3PcCECGeQ1olotRMMFzwRpqJjPwVI59?key=qRnlb8_5CEQD42k9HYYOVA"
-          style="
-            width: 240px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            max-width: 100%;
-            overflow: hidden;
-          "
-        />
-      </span>
-    </p>
-    <p class="c2" style="max-width: 100%; overflow: hidden; text-align: center">
-      <span>
-        <img
-          alt=""
-          src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXcm7MxeOFk2GrD9nc6MLL593zL6IqmKzo9Sd7W-aLlvFVNvpfej2vZcGX_dI7dMpSzwxfMVhQuH0_jKIfLUd_jWLASlf2pBuznyOGeIxvxLJlzKzqbH_VAIYSk9srDUF344-ULTiQ=s320?key=qRnlb8_5CEQD42k9HYYOVA"
-          style="
-            width: 240px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            max-width: 100%;
-            overflow: hidden;
-          "
-        />
-      </span>
-    </p>
-    <p class="c2" style="max-width: 100%; overflow: hidden; text-align: center">
-      <span>
-        <img
-          alt=""
-          src="assets/one-piece-shanks.gif"
-          style="
-            width: 240px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            max-width: 100%;
-            overflow: hidden;
-          "
-        />
-      </span>
-    </p>
-    <p class="c2" style="max-width: 100%; overflow: hidden; text-align: center">
-      <span>
-        <img
-          alt=""
-          src="assets/doffy.gif"
-          style="
-            width: 240px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            max-width: 100%;
-            overflow: hidden;
-          "
-        />
-      </span>
-    </p>
-
     <footer class="footer">
-      <div class="footer-left">© 2000-2026</div>
-      <div class="footer-center">AZRIEL</div>
+      <div class="footer-left">© 2026</div>
+      <div class="footer-center"><i>tazriel</i></div>
       <div class="footer-right" onclick="scrollToTop();">Top ↑</div>
     </footer>
-
-    <script>
-      // This script block is now empty since all the Three.js code 
-      // has been moved to your index.js file
-    </script>
-        const material = new THREE.MeshPhongMaterial({
-          color: 0x00ff88,
-          shininess: 100,
-          transparent: true,
-          opacity: 0.8
-        });
-        model = new THREE.Mesh(geometry, material);
-        scene.add(model);
-        console.log('Fallback sphere created');
-      }
-
-      function onWindowResize() {
-        const container = document.getElementById('threejs-container');
-        camera.aspect = container.offsetWidth / container.offsetHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(container.offsetWidth, container.offsetHeight);
-      }
-
-      const clock = new THREE.Clock();
-
-      function animate() {
-        requestAnimationFrame(animate);
-
-        const delta = clock.getDelta();
-
-        // Update animations
-        if (mixer) {
-          mixer.update(delta);
-        }
-
-        // Rotate the model slowly
-        if (model) {
-          model.rotation.y += 0.005;
-        }
-
-        renderer.render(scene, camera);
-      }
-
-      // Initialize Three.js when the page loads
-      window.addEventListener('load', () => {
-        initThreeJS();
-        animate();
-      });
-
-      // Keep your existing functions
-      function removeSecretClass() {
-        // Your existing function here
-      }
-
-      function scrollToTop() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    </script>
   </body>
 </html>
