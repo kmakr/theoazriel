@@ -217,7 +217,8 @@ header .nav.social ul.flat a {
   top: 0;
   left: 0;
   width: 100vw; /* Full viewport width */
-  height: 100vh; /* Full viewport height */
+  height: 100vh; /* Fallback for browsers without dvh */
+  height: 100dvh; /* Use dynamic viewport height to avoid iOS Safari 100vh bugs */
   margin: 0;
   padding: 0;
   overflow: hidden;

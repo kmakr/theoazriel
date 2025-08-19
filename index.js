@@ -31,9 +31,11 @@ function initThreeJS() {
   // scene.background = new THREE.Color(0x0a0a0a);
 
   // Create camera
+  const { width: initialWidth, height: initialHeight } =
+    getContainerSize(container);
   camera = new THREE.PerspectiveCamera(
     70,
-    container.offsetWidth / container.offsetHeight,
+    initialWidth / initialHeight,
     1,
     1000
   );
@@ -45,7 +47,7 @@ function initThreeJS() {
     antialias: true,
     alpha: true,
   });
-  renderer.setSize(container.offsetWidth, container.offsetHeight);
+  renderer.setSize(initialWidth, initialHeight);
   // Cap pixel ratio for performance on high-DPI screens
   // renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
@@ -72,6 +74,12 @@ function initThreeJS() {
 
   // Handle window resize
   window.addEventListener("resize", onWindowResize);
+  if ("ResizeObserver" in window) {
+    const resizeObserver = new ResizeObserver(() => {
+      onWindowResize();
+    });
+    resizeObserver.observe(container);
+  }
 }
 
 function loadGLTFModel() {
@@ -179,9 +187,10 @@ function createFallbackSphere() {
 
 function onWindowResize() {
   const container = document.getElementById("threejs-container");
-  camera.aspect = container.offsetWidth / container.offsetHeight;
+  const { width, height } = getContainerSize(container);
+  camera.aspect = width / height;
   camera.updateProjectionMatrix();
-  renderer.setSize(container.offsetWidth, container.offsetHeight);
+  renderer.setSize(width, height);
 }
 
 const clock = new THREE.Clock();
@@ -204,8 +213,21 @@ function animate() {
   renderer.render(scene, camera);
 }
 
-// Initialize Three.js as soon as DOM is ready
-window.addEventListener("DOMContentLoaded", () => {
+function getContainerSize(container) {
+  if (!container) {
+    return { width: window.innerWidth || 1, height: window.innerHeight || 1 };
+  }
+  const width =
+    container.clientWidth || container.offsetWidth || window.innerWidth || 1;
+  const height =
+    container.clientHeight || container.offsetHeight || window.innerHeight || 1;
+  return { width: Math.max(1, width), height: Math.max(1, height) };
+}
+
+// Initialize Three.js when the page finishes loading to avoid early zero sizes
+window.addEventListener("load", () => {
   initThreeJS();
+  // Ensure a resize after first paint
+  requestAnimationFrame(() => onWindowResize());
   animate();
 });
