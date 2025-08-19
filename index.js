@@ -93,7 +93,7 @@ function loadGLTFModel() {
       const percent = Math.round((itemsLoaded / itemsTotal) * 100);
       loadingText.textContent = percent + "%";
     } else {
-      loadingText.textContent = "Loading…";
+      loadingText.textContent = "brewing";
     }
   };
 

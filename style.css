@@ -154,19 +154,19 @@ header .nav.social ul.flat a {
 }
 
 .footer {
-  font-size: 4vw;
+  font-size: 5vw;
   color: #ffffff;
   position: fixed;
-  margin: 20px;
+  margin: 1vw;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 60px;
+  /* height: 60px; */
   background: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 1vw;
   z-index: 1000;
   /* font-size: 30px; */
 }
@@ -195,20 +195,21 @@ header .nav.social ul.flat a {
 }
 
 .footer-post {
-  font-size: 4vw;
+  font-size: 5vw;
   color: #000000;
   position: fixed;
-  margin: 20px;
+  margin: 1vw;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 60px;
+  /* height: 60px; */
   background: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 1vw;
   z-index: 1000;
+  /* font-size: 30px; */
 }
 
 #threejs-container {
