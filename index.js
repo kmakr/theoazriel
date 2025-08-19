@@ -46,7 +46,9 @@ function initThreeJS() {
     alpha: true,
   });
   renderer.setSize(container.offsetWidth, container.offsetHeight);
-  renderer.setPixelRatio(window.devicePixelRatio);
+  // Cap pixel ratio for performance on high-DPI screens
+  // renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
@@ -73,6 +75,11 @@ function initThreeJS() {
 }
 
 function loadGLTFModel() {
+  // Enable in-memory caching across reloads of the same assets
+  if (THREE.Cache) {
+    THREE.Cache.enabled = true;
+  }
+
   const manager = new THREE.LoadingManager();
 
   manager.onStart = function () {
@@ -96,6 +103,13 @@ function loadGLTFModel() {
   };
 
   const loader = new THREE.GLTFLoader(manager);
+  // Setup DRACO decoder for compressed meshes
+  if (typeof THREE.DRACOLoader !== "undefined") {
+    const dracoLoader = new THREE.DRACOLoader();
+    // Use CDN decoder path matching the loader version
+    dracoLoader.setDecoderPath("https://www.gstatic.com/draco/v1/decoders/");
+    loader.setDRACOLoader(dracoLoader);
+  }
 
   // Example with a test model - replace with your model path
   // loader.load('assets/your-model.gltf', ...)
@@ -105,7 +119,7 @@ function loadGLTFModel() {
 
   // Uncomment and modify this when you have a GLTF file:
   loader.load(
-    "assets/mossy.glb",
+    "assets/mossy.compressed.glb",
     function (gltf) {
       // Remove the fallback sphere
       if (model) {
@@ -116,7 +130,6 @@ function loadGLTFModel() {
       model.scale.setScalar(3.2);
       // model.position.set(0, -0.5, 1);
       model.position.set(0, -0.5, 1);
-
 
       model.traverse(function (child) {
         if (child.isMesh) {
@@ -191,8 +204,8 @@ function animate() {
   renderer.render(scene, camera);
 }
 
-// Initialize Three.js when the page loads
-window.addEventListener("load", () => {
+// Initialize Three.js as soon as DOM is ready
+window.addEventListener("DOMContentLoaded", () => {
   initThreeJS();
   animate();
 });
