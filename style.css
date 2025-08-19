@@ -7,13 +7,17 @@ body {
   /* color: #444; */
   padding: 0 10px;
   background-color: #faf9f5;
-  margin-bottom: 50px;
+  /* margin-bottom: 50px; */
 }
 
 h1,
 h2 {
   margin-top: 0;
   margin-bottom: 0; /* Adjust this value to reduce the space below h1 */
+}
+
+h1.post-title {
+    color: #c96342;
 }
 
 h3 {
@@ -30,6 +34,10 @@ em {
 
 .secret {
   font-size: 0;
+}
+
+#secret {
+  color: #ffff;
 }
 
 .subtitle {
@@ -65,14 +73,19 @@ a:focus {
 }
 
 header {
-  display: grid;
+  /* display: grid; */
   grid-template-columns: 1fr auto;
   grid-auto-rows: auto;
   row-gap: 0;
   align-items: center;
 }
 
-header h1 {
+header .nav.social {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* header h1 {
   grid-column: 1 / -1;
 }
 
@@ -82,7 +95,7 @@ header h2 {
 
 header .nav.social {
   grid-column: 2;
-}
+} */
 
 header h3,
 header p {
@@ -141,6 +154,8 @@ header .nav.social ul.flat a {
 }
 
 .footer {
+  font-size: 4vw;
+  color: #ffffff;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -176,4 +191,45 @@ header .nav.social ul.flat a {
 
 .footer-right:hover {
   /* color: #333; */
+}
+
+.footer-post {
+  font-size: 4vw;
+  color: #000000;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 1000;
+}
+
+#threejs-container {
+  position: fixed; /* Stay fixed in viewport */
+  top: 0;
+  left: 0;
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  z-index: -1; /* Push it behind other elements */
+}
+
+/* Make the canvas fill its container */
+#threejs-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  body {
+    margin: 10px 10px 10px 10px;
+  }
 }
